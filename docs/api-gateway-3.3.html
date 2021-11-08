@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>api-gateway-3.3</title>
+
+
+<style type="text/css">
+*{margin:0;padding:0;}
+body {
+	font:13.34px helvetica,arial,freesans,clean,sans-serif;
+	color:black;
+	line-height:1.4em;
+	background-color: #F8F8F8;
+	padding: 0.7em;
+}
+p {
+	margin:1em 0;
+	line-height:1.5em;
+}
+table {
+	font-size:inherit;
+	font:100%;
+	margin:1em;
+}
+table th{border-bottom:1px solid #bbb;padding:.2em 1em;}
+table td{border-bottom:1px solid #ddd;padding:.2em 1em;}
+input[type=text],input[type=password],input[type=image],textarea{font:99% helvetica,arial,freesans,sans-serif;}
+select,option{padding:0 .25em;}
+optgroup{margin-top:.5em;}
+pre,code{font:12px Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;}
+pre {
+	margin:1em 0;
+	font-size:12px;
+	background-color:#eee;
+	border:1px solid #ddd;
+	padding:5px;
+	line-height:1.5em;
+	color:#444;
+	overflow:auto;
+	-webkit-box-shadow:rgba(0,0,0,0.07) 0 1px 2px inset;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;border-radius:3px;
+}
+pre code {
+	padding:0;
+	font-size:12px;
+	background-color:#eee;
+	border:none;
+}
+code {
+	font-size:12px;
+	background-color:#f8f8ff;
+	color:#444;
+	padding:0 .2em;
+	border:1px solid #dedede;
+}
+img{border:0;max-width:100%;}
+abbr{border-bottom:none;}
+a{color:#4183c4;text-decoration:none;}
+a:hover{text-decoration:underline;}
+a code,a:link code,a:visited code{color:#4183c4;}
+h2,h3{margin:1em 0;}
+h1,h2,h3,h4,h5,h6{border:0;}
+h1{font-size:170%;border-top:4px solid #aaa;padding-top:.5em;margin-top:1.5em;}
+h1:first-child{margin-top:0;padding-top:.25em;border-top:none;}
+h2{font-size:150%;margin-top:1.5em;border-top:4px solid #e0e0e0;padding-top:.5em;}
+h3{margin-top:1em;}
+hr{border:1px solid #ddd;}
+ul{margin:1em 0 1em 2em;}
+ol{margin:1em 0 1em 2em;}
+ul li,ol li{margin-top:.5em;margin-bottom:.5em;}
+ul ul,ul ol,ol ol,ol ul{margin-top:0;margin-bottom:0;}
+blockquote{margin:1em 0;border-left:5px solid #ddd;padding-left:.6em;color:#555;}
+dt{font-weight:bold;margin-left:1em;}
+dd{margin-left:2em;margin-bottom:1em;}
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+kbd {
+  display: inline-block;padding: 3px 5px;font-size: 11px;line-height: 10px;color: #555;vertical-align: middle;background-color: #fcfcfc;border: solid 1px #ccc;border-bottom-color: #bbb;border-radius: 3px;box-shadow: inset 0 -1px 0 #bbb;
+}
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+}
+</style>
+
+<style type="text/css">
+/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: black;
+	background: none;
+	text-shadow: 0 1px white;
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+@media print {
+	code[class*="language-"],
+	pre[class*="language-"] {
+		text-shadow: none;
+	}
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #f5f2f0;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: slategray;
+}
+
+.token.punctuation {
+	color: #999;
+}
+
+.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+	color: #a67f59;
+	background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+	color: #07a;
+}
+
+.token.function {
+	color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+	color: #e90;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<h3 id="toc_0">3.3 디바이스 상태 변경 REST API 구축하기</h3>
+
+<ul>
+<li><p>API 요청</p>
+
+<div><pre><code class="language-none">PUT /devices/{deviceID}</code></pre></div>
+
+<ul>
+<li><p>payload </p>
+
+<div><pre><code class="language-javascript">{ 
+    &quot;tags&quot; : [
+        {
+            &quot;attrName&quot;: &quot;temperature&quot;,
+            &quot;attrValue&quot;: &quot;27.0&quot;
+        },
+        {
+            &quot;attrName&quot;: &quot;LED&quot;,
+            &quot;attrValue&quot;: &quot;OFF&quot;
+        }
+    ]
+}</code></pre></div></li>
+</ul></li>
+<li><p>API 응답</p>
+
+<ul>
+<li><a href="https://docs.aws.amazon.com/ko_kr/iot/latest/developerguide/API_UpdateThingShadow.html">UpdateThingShadow</a>의 <a href="https://docs.aws.amazon.com/ko_kr/iot/latest/developerguide/device-shadow-document-syntax.html#device-shadow-example-response-json">응답 상태 문서</a> </li>
+</ul></li>
+</ul>
+
+<h2 id="toc_1"></h2>
+
+<h4 id="toc_2">1단계: AWS Toolkit을 통해 Lambda 함수 생성</h4>
+
+<ol>
+<li>다음 정보를 바탕으로 AWS Lambda 프로젝트를 Eclipse용 AWS Toolkit을 이용하여 생성한다.
+
+<ul>
+<li><strong>Project name</strong>: <em>UpdateDeviceLambdaJavaProject</em></li>
+<li><strong>Class Name</strong>: <em>UpdateDeviceHandler</em></li>
+<li><strong>Input Type</strong>에서 <em>Custom</em>을 선택합니다. </li>
+</ul></li>
+<li><p>생성된 <em>UpdateDeviceLambdaJavaProject</em>의 <strong>pom.xml</strong> 파일을 열고, &lt;dependencies&gt; 태그 안에 <strong>aws-java-sdk-iot</strong>에 대한 의존성을 추가한 후에, 파일을 <strong>저장</strong>합니다.</p>
+
+<div><pre><code class="language-markup">  &lt;dependencies&gt;
+    ...    
+    &lt;dependency&gt;
+      &lt;groupId&gt;com.amazonaws&lt;/groupId&gt;
+      &lt;artifactId&gt;aws-java-sdk-iot&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+
+  &lt;/dependencies&gt;</code></pre></div></li>
+<li><p>Eclipse 프로젝트 탐색기를 사용하여 <em>UpdateDeviceLambdaJavaProject</em> 프로젝트에서 <em>UpdateDeviceHandler.java</em>를 열고, 다음 코드로 바꿉니다.</p>
+
+<div><pre><code class="language-java">import java.nio.ByteBuffer;
+import java.util.ArrayList;
+
+import com.amazonaws.services.iotdata.AWSIotData;
+import com.amazonaws.services.iotdata.AWSIotDataClientBuilder;
+import com.amazonaws.services.iotdata.model.UpdateThingShadowRequest;
+import com.amazonaws.services.iotdata.model.UpdateThingShadowResult;
+import com.amazonaws.services.lambda.runtime.Context;
+import com.amazonaws.services.lambda.runtime.RequestHandler;
+import com.fasterxml.jackson.annotation.JsonCreator;
+
+public class UpdateDeviceHandler implements RequestHandler&lt;Event, String&gt; {
+
+    @Override
+    public String handleRequest(Event event, Context context) {
+        context.getLogger().log(&quot;Input: &quot; + event);
+
+        AWSIotData iotData = AWSIotDataClientBuilder.standard().build();
+
+        String payload = getPayload(event.tags);
+
+        UpdateThingShadowRequest updateThingShadowRequest  = 
+                new UpdateThingShadowRequest()
+                    .withThingName(event.device)
+                    .withPayload(ByteBuffer.wrap(payload.getBytes()));
+
+        UpdateThingShadowResult result = iotData.updateThingShadow(updateThingShadowRequest);
+        byte[] bytes = new byte[result.getPayload().remaining()];
+        result.getPayload().get(bytes);
+        String resultString = new String(bytes);
+        return resultString;
+    }
+
+    private String getPayload(ArrayList&lt;Tag&gt; tags) {
+        String tagstr = &quot;&quot;;
+        for (int i=0; i &lt; tags.size(); i++) {
+            if (i !=  0) tagstr += &quot;, &quot;;
+            tagstr += String.format(&quot;\&quot;%s\&quot; : \&quot;%s\&quot;&quot;, tags.get(i).tagName, tags.get(i).tagValue);
+        }
+        return String.format(&quot;{ \&quot;state\&quot;: { \&quot;desired\&quot;: { %s } } }&quot;, tagstr);
+    }
+
+}
+
+class Event {
+    public String device;
+    public ArrayList&lt;Tag&gt; tags;
+
+    public Event() {
+         tags = new ArrayList&lt;Tag&gt;();
+    }
+}
+
+class Tag {
+    public String tagName;
+    public String tagValue;
+
+    @JsonCreator 
+    public Tag() {
+    }
+
+    public Tag(String n, String v) {
+        tagName = n;
+        tagValue = v;
+    }
+}</code></pre></div></li>
+<li><p><strong>Lambda에 함수를 업로드하려면</strong>, Eclipse 코드 창에서 마우스 오른쪽 버튼을 클릭하고 <strong>[AWS Lambda]</strong>와 <strong>[Upload function to AWS Lambda]</strong>를 차례대로 선택합니다.</p></li>
+<li><p><strong>[Select Target Lambda Function]</strong> 페이지에서 사용할 AWS 리전을 선택합니다. 이 리전은 Amazon S3 버킷에 대해 선택한 리전과 동일해야 합니다.</p></li>
+<li><p>새 Lambda 함수 생성을 선택하고 함수 이름(예: <em>UpdateDeviceFunction</em>)을 입력한 후, [<strong>Next</strong>]를 선택합니다.</p></li>
+<li><p><strong>함수 구성(Function Configuration</strong> 페이지에서 대상 Lambda 함수에 대한 설명을 입력하고 함수에서 사용할 <strong>IAM 역할 선택</strong>합니다.</p>
+
+<ul>
+<li>사용할 역할은 <strong>AWSIoTFullAccess</strong> 정책이 연결되어 있어야 합니다. 만약 이러한 역할이 없다면, IAM 콘솔을 통해 해당 역할을 생성합니다.
+
+<ul>
+<li>다음 <a href="https://docs.aws.amazon.com/ko_kr/lambda/latest/dg/lambda-intro-execution-role.html">링크</a>를 통해 역할 생성에 대해서 자세히 살펴보세요.</li>
+</ul></li>
+</ul></li>
+<li><p>Lambda 함수 코드를 저장할 S3 버킷을 선택합니다. 만약 새로운 Amazon S3 버킷을 생성하고 싶은 경우에는 <strong>생성</strong> 버튼을 클릭하고 버킷 생성 대화 상자에 버킷 이름을 입력합니다.</p></li>
+<li><p><strong>Finish</strong>를 선택하여 Lambda 함수를 AWS에 업로드합니다. </p></li>
+<li><p><strong>Lambda 함수를 실행하려면</strong>, Eclipse 코드 창에서 마우스 오른쪽 버튼을 클릭하고 AWS Lambda를 선택한 후 <strong>Run Function on AWS Lambda</strong>(AWS Lambda에서 함수 실행)를 선택합니다. </p></li>
+<li><p><strong>Enter the JSON input for your function</strong>이 선택된 상태에서 입력 창에 다음 입력 문자열을 입력한다.</p>
+
+<ul>
+<li>조회할 사물의 이름이 <em>MyMKRWiFi1010</em>인 경우를 가정</li>
+<li>device 속성: 변경할 사물의 이름</li>
+<li><p>tags 속성: 변경할 사물의 태그 객체 배열 (이름과 값으로 정의됨) </p>
+
+<div><pre><code class="language-JSON">{
+    &quot;device&quot;: &quot;MyMKRWiFi1010&quot;,
+    &quot;tags&quot; : [
+        {
+            &quot;tagName&quot;: &quot;temperature&quot;,
+            &quot;tagValue&quot;: &quot;25.2&quot;
+        },
+        {
+            &quot;tagName&quot;: &quot;LED&quot;,
+            &quot;tagValue&quot;: &quot;ON&quot;
+        }   
+    ]
+}</code></pre></div></li>
+</ul></li>
+<li><p><strong>Invoke</strong> 버튼을 클릭한 후, <strong>Eclipse Console</strong> 창에 다음과 같은 결과가 출력되는 지 확인합니다.</p>
+
+<div><pre><code class="language-none">Invoking function...
+==================== FUNCTION OUTPUT ====================
+&quot;{\&quot;state\&quot;:{\&quot;desired\&quot;:{\&quot;temperature\&quot;:\&quot;25.2\&quot;,\&quot;LED\&quot;:\&quot;ON\&quot;}},\&quot;metadata\&quot;:{\&quot;desired\&quot;:{\&quot;temperature\&quot;:{\&quot;timestamp\&quot;:1575212613},\&quot;LED\&quot;:{\&quot;timestamp\&quot;:1575212613}}},\&quot;version\&quot;:4454,\&quot;timestamp\&quot;:1575212613}&quot;
+==================== FUNCTION LOG OUTPUT ====================
+START RequestId: ffbcd4f1-e3c5-483d-97a3-1c9b4685dd5a Version: $LATEST
+Input: com.amazonaws.lambda.demo.Event@6e0e048aEND RequestId: ffbcd4f1-e3c5-483d-97a3-1c9b4685dd5a
+REPORT RequestId: ffbcd4f1-e3c5-483d-97a3-1c9b4685dd5a  Duration: 7266.17 ms    Billed Duration: 7300 ms    Memory Size: 512 MB Max Memory Used: 140 MB Init Duration: 382.85 ms    </code></pre></div></li>
+</ol>
+
+<h2 id="toc_3"></h2>
+
+<h4 id="toc_4">2단계 API Gateway 콘솔에서 REST API 생성</h4>
+
+<ol>
+<li><a href="https://ap-northeast-2.console.aws.amazon.com/apigateway/">API Gateway 콘솔</a>로 이동합니다.</li>
+<li>이전에 생성한 <em>my-device-api</em>를 선택합니다.</li>
+<li>리소스 이름(<strong>/{device}</strong>)을 선택합니다. </li>
+<li><strong>작업</strong> 드롭다운 메뉴에서 <strong>메소드 생성</strong>을 선택합니다.</li>
+<li>리소스 이름 (/{devices}) 아래에 드롭다운 메뉴가 보일 것입니다. <strong>PUT</strong>을 선택한 후 <strong>확인 표시 아이콘</strong>(체크)을 선택하여 선택 사항을 저장합니다.</li>
+<li> <strong>/devices/{device} – PUT – 설정</strong> 창의 <strong>통합 유형</strong>에서 <em>Lambda 함수</em>를 선택합니다.</li>
+<li><strong>Lambda 프록시 통합 사용</strong> 상자를 <strong>선택하지 않은 상태</strong>로 놔둡니다.</li>
+<li><strong>Lambda 리전</strong>에서 Lambda 함수를 생성한 리전을 선택합니다.</li>
+<li><strong>Lambda 함수</strong> 필드에 문자를 입력한 후 드롭다운 메뉴에서 <em>UpdateDeviceFunction</em>을 선택합니다.  <strong>저장</strong>을 선택하여 선택 사항을 저장합니다</li>
+<li><strong>Lambda 함수에 대한 권한 추가</strong> 팝업이 나타나면(<strong>Lambda 함수를 호출하기 위해 API Gateway에 권한을 부여하려고 합니다....</strong>”), 확인을 선택하여 API Gateway에 해당 권한을 부여합니다.
+
+<ul>
+<li>이제 <strong>/devices/{device} – PUT – 메소드 실행</strong> 창이 보일 것입니다.</li>
+</ul></li>
+<li><p>다음 단계는 API Gateway를 통해 들어오는 클라이언트의 입력을 Lambda 함수에 전달하기 위해서 클라이언트의 입력을 Lambda 함수의 입력으로 매핑하는 과정에 대해서 진행합니다.</p>
+
+<ul>
+<li>API Gatway에서 <strong>모델</strong>은 클라이언트의 입력 데이터 구조를 <a href="https://tools.ietf.org/html/draft-zyp-json-schema-04">JSON 스키마 draft 4</a>를 사용하여 정의한 것으로서, 이를 이용하여 API Gateway가 클라이언트 입력에 대한 검사 및 SDK 생성에 사용됩니다.</li>
+<li><p><strong>모델</strong>을 정의하려면 API Gateway 기본 탐색 창에서 API 아래에 있는 <strong>모델</strong>을 선택한 다음 생성을 선택합니다.</p>
+
+<ol>
+<li>모델 이름에 <em>UpdateDeviceInput</em>을 입력합니다.</li>
+<li>콘텐츠 유형에 <em>application/json</em>을 입력합니다.</li>
+<li>Model description(모델 설명)은 비워 둡니다.</li>
+<li><p>다음 스키마 정의를 Model schema(모델 스키마) 편집기에 복사합니다.</p>
+
+<div><pre><code class="language-none">{
+  &quot;$schema&quot;: &quot;http://json-schema.org/draft-04/schema#&quot;,
+  &quot;title&quot;: &quot;UpdateDeviceInput&quot;,
+  &quot;type&quot; : &quot;object&quot;,
+  &quot;properties&quot; : {
+      &quot;tags&quot; : {
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+              &quot;type&quot;: &quot;object&quot;,
+              &quot;properties&quot; : {
+                &quot;tagName&quot; : { &quot;type&quot; : &quot;string&quot;},
+                &quot;tagValue&quot; : { &quot;type&quot; : &quot;string&quot;}
+              }
+          }
+      }
+  }
+}</code></pre></div></li>
+<li><p><strong>모델 생성</strong>을 선택하여 입력 모델 정의를 완료합니다.</p></li>
+<li><p>리소스를 선택하고 /{device} PUT 메서드를 선택하고 <strong>메서드 요청(Method Request)</strong>을 선택하고 <strong>요청 본문(Request body)</strong>을 확장합니다. <strong>모델 추가</strong>를 선택합니다. 콘텐츠 유형에 <em>application/json</em>을 입력합니다. 모델 이름에서 <em>UpdateDeviceInput</em>을 선택합니다. 확인 표시 아이콘을 선택하여 설정을 저장합니다.</p></li>
+</ol></li>
+</ul></li>
+<li><p>/{device} PUT 메서드를 선택하고 <strong>통합 요청(Integration Request)</strong>을 선택하여 본문 매핑 템플릿을 설정합니다. </p>
+
+<ol>
+<li><p><strong>매핑 템플릿(Mapping Templates)</strong> 섹션을 확장합니다. <strong>매핑 템플릿 추가(Add mapping template)</strong>를 선택합니다. <strong>Content-Type</strong>에 <em>application/json</em>을 입력합니다. 확인 표시 아이콘을 선택하여 설정을 저장합니다.</p>
+
+<ul>
+<li>나타나는 팝업에서 <strong>예, 이 통합 보호(Yes, secure this integration)</strong>를 선택합니다.</li>
+</ul></li>
+<li><p><strong>요청 본문 패스스루(Request body passthrough)</strong>에 권장되는 <strong>정의된 템플릿이 없는 경우(권장)</strong>를 선택합니다.</p></li>
+<li><p><strong>템플릿 생성(Generate template)</strong>에서 <em>UpdateDeviceInput</em>을 선택하여 초기 매핑 템플릿을 생성합니다. 이 옵션은 처음부터 매핑 템플릿을 작성할 필요가 없는 모델 스키마를 정의했기 때문에 사용할 수 있습니다.</p></li>
+<li><p>매핑 템플릿 편집기에 생성된 매핑 스크립트를 다음과 바꿉니다.</p>
+
+<div><pre><code class="language-javascript">#set($inputRoot = $input.path(&#39;$&#39;))
+{
+    &quot;device&quot;: &quot;$input.params(&#39;device&#39;)&quot;,
+    &quot;tags&quot; : [
+    ##TODO: Update this foreach loop to reference array from input json
+        #foreach($elem in $inputRoot.tags)
+        {
+            &quot;tagName&quot; : &quot;$elem.tagName&quot;,
+            &quot;tagValue&quot; : &quot;$elem.tagValue&quot;
+        } 
+        #if($foreach.hasNext),#end
+        #end
+    ]
+}</code></pre></div></li>
+<li><p><strong>저장</strong>을 선택합니다.</p></li>
+</ol></li>
+<li><p><strong>/devices/{device} – PUT – 메소드 실행</strong> 창으로 이동하여, <strong>클라이언트</strong> 부분의 <strong>테스트</strong>를 클릭합니다.</p></li>
+<li><p>{device} 경로에 본인이 만든 사물 이름(예, <em>MyMKRWiFi1010</em>)을 입력합니다. </p></li>
+<li><p><strong>요청 본문</strong>에 아래와 같은 내용을 입력합니다.</p>
+
+<div><pre><code class="language-none">{
+    &quot;tags&quot; : [
+            {
+                &quot;tagName&quot;: &quot;temperature&quot;,
+                &quot;tagValue&quot;: &quot;25.2&quot;
+            },
+            {
+                &quot;tagName&quot;: &quot;LED&quot;,
+                &quot;tagValue&quot;: &quot;ON&quot;
+            }   
+    ]
+}</code></pre></div></li>
+<li><p><strong>테스트</strong>버튼을 클릭하여 다음과 같은 결과가 나오는 지 확인합니다.</p>
+
+<p><img src="figures/update-device-test.png" alt=""></p></li>
+</ol>
+
+<h2 id="toc_5"></h2>
+
+<h4 id="toc_6">3단계: CORS 활성환 및 API Gateway 콘솔에서 REST API 배포</h4>
+
+<p>REST API 리소스에 대해 CORS 지원 활성화</p>
+
+<ol>
+<li>리소스에서 <strong>리소스</strong>를 선택합니다. 그렇게 하면 리소스 상의 모든 메서드에 대해 CORS가 활성화됩니다.</li>
+<li><strong>작업</strong> 드롭다운 메뉴에서 <strong>CORS 활성화(Enable CORS)</strong>를 선택합니다.</li>
+<li><strong>CORS 활성화 및 기존의 CORS 헤더 대체</strong>를 선택합니다.</li>
+<li><strong>메서드 변경사항 확인</strong> 창에서 <strong>예, 기존 값을 대체하겠습니다.</strong>를 선택합니다.</li>
+</ol>
+
+<p>2단계를 완료하면 API를 생성했지만 아직 실제로 사용할 수는 없습니다. 배포해야 하기 때문입니다.</p>
+
+<ol>
+<li><strong>작업</strong> 드롭다운 메뉴에서 <strong>Deploy API(API 배포)</strong>를 선택합니다.</li>
+<li><strong>배포 스테이지</strong> 드롭다운 메뉴에서 <strong>prod</strong>를 선택합니다.</li>
+<li><strong>배포</strong>을 선택합니다.</li>
+</ol>
+
+<h2 id="toc_7"></h2>
+
+<h4 id="toc_8">4단계: REST API 테스트</h4>
+
+<ol>
+<li><strong>prod 스테이지 편집기</strong>의 맨 위에 있는 <strong>호출 URL</strong>을 적어 둡니다.</li>
+<li><p><a href="https://www.getpostman.com/">POSTMAN</a> 등의 도구를 사용하여 테스트 해 봅니다.</p>
+
+<p><img src="figures/api-prod-run3.png" alt=""></p></li>
+<li><p><a href="api-gateway.html#2.3">2.3</a>절에서 정의한 응답모델과 동일한 형식의 JSon 문자열이 반환된 것을 확인할 수 있습니다.</p></li>
+</ol>
+
+
+
+<script type="text/javascript">
+var _self="undefined"!=typeof window?window:"undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?self:{},Prism=function(){var e=/\blang(?:uage)?-(\w+)\b/i,t=0,n=_self.Prism={util:{encode:function(e){return e instanceof a?new a(e.type,n.util.encode(e.content),e.alias):"Array"===n.util.type(e)?e.map(n.util.encode):e.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/\u00a0/g," ")},type:function(e){return Object.prototype.toString.call(e).match(/\[object (\w+)\]/)[1]},objId:function(e){return e.__id||Object.defineProperty(e,"__id",{value:++t}),e.__id},clone:function(e){var t=n.util.type(e);switch(t){case"Object":var a={};for(var r in e)e.hasOwnProperty(r)&&(a[r]=n.util.clone(e[r]));return a;case"Array":return e.map&&e.map(function(e){return n.util.clone(e)})}return e}},languages:{extend:function(e,t){var a=n.util.clone(n.languages[e]);for(var r in t)a[r]=t[r];return a},insertBefore:function(e,t,a,r){r=r||n.languages;var l=r[e];if(2==arguments.length){a=arguments[1];for(var i in a)a.hasOwnProperty(i)&&(l[i]=a[i]);return l}var o={};for(var s in l)if(l.hasOwnProperty(s)){if(s==t)for(var i in a)a.hasOwnProperty(i)&&(o[i]=a[i]);o[s]=l[s]}return n.languages.DFS(n.languages,function(t,n){n===r[e]&&t!=e&&(this[t]=o)}),r[e]=o},DFS:function(e,t,a,r){r=r||{};for(var l in e)e.hasOwnProperty(l)&&(t.call(e,l,e[l],a||l),"Object"!==n.util.type(e[l])||r[n.util.objId(e[l])]?"Array"!==n.util.type(e[l])||r[n.util.objId(e[l])]||(r[n.util.objId(e[l])]=!0,n.languages.DFS(e[l],t,l,r)):(r[n.util.objId(e[l])]=!0,n.languages.DFS(e[l],t,null,r)))}},plugins:{},highlightAll:function(e,t){var a={callback:t,selector:'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code'};n.hooks.run("before-highlightall",a);for(var r,l=a.elements||document.querySelectorAll(a.selector),i=0;r=l[i++];)n.highlightElement(r,e===!0,a.callback)},highlightElement:function(t,a,r){for(var l,i,o=t;o&&!e.test(o.className);)o=o.parentNode;o&&(l=(o.className.match(e)||[,""])[1],i=n.languages[l]),t.className=t.className.replace(e,"").replace(/\s+/g," ")+" language-"+l,o=t.parentNode,/pre/i.test(o.nodeName)&&(o.className=o.className.replace(e,"").replace(/\s+/g," ")+" language-"+l);var s=t.textContent,u={element:t,language:l,grammar:i,code:s};if(!s||!i)return n.hooks.run("complete",u),void 0;if(n.hooks.run("before-highlight",u),a&&_self.Worker){var c=new Worker(n.filename);c.onmessage=function(e){u.highlightedCode=e.data,n.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,r&&r.call(u.element),n.hooks.run("after-highlight",u),n.hooks.run("complete",u)},c.postMessage(JSON.stringify({language:u.language,code:u.code,immediateClose:!0}))}else u.highlightedCode=n.highlight(u.code,u.grammar,u.language),n.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,r&&r.call(t),n.hooks.run("after-highlight",u),n.hooks.run("complete",u)},highlight:function(e,t,r){var l=n.tokenize(e,t);return a.stringify(n.util.encode(l),r)},tokenize:function(e,t){var a=n.Token,r=[e],l=t.rest;if(l){for(var i in l)t[i]=l[i];delete t.rest}e:for(var i in t)if(t.hasOwnProperty(i)&&t[i]){var o=t[i];o="Array"===n.util.type(o)?o:[o];for(var s=0;s<o.length;++s){var u=o[s],c=u.inside,g=!!u.lookbehind,h=!!u.greedy,f=0,d=u.alias;u=u.pattern||u;for(var p=0;p<r.length;p++){var m=r[p];if(r.length>e.length)break e;if(!(m instanceof a)){u.lastIndex=0;var y=u.exec(m),v=1;if(!y&&h&&p!=r.length-1){var b=r[p+1].matchedStr||r[p+1],k=m+b;if(p<r.length-2&&(k+=r[p+2].matchedStr||r[p+2]),u.lastIndex=0,y=u.exec(k),!y)continue;var w=y.index+(g?y[1].length:0);if(w>=m.length)continue;var _=y.index+y[0].length,P=m.length+b.length;if(v=3,P>=_){if(r[p+1].greedy)continue;v=2,k=k.slice(0,P)}m=k}if(y){g&&(f=y[1].length);var w=y.index+f,y=y[0].slice(f),_=w+y.length,S=m.slice(0,w),O=m.slice(_),j=[p,v];S&&j.push(S);var A=new a(i,c?n.tokenize(y,c):y,d,y,h);j.push(A),O&&j.push(O),Array.prototype.splice.apply(r,j)}}}}}return r},hooks:{all:{},add:function(e,t){var a=n.hooks.all;a[e]=a[e]||[],a[e].push(t)},run:function(e,t){var a=n.hooks.all[e];if(a&&a.length)for(var r,l=0;r=a[l++];)r(t)}}},a=n.Token=function(e,t,n,a,r){this.type=e,this.content=t,this.alias=n,this.matchedStr=a||null,this.greedy=!!r};if(a.stringify=function(e,t,r){if("string"==typeof e)return e;if("Array"===n.util.type(e))return e.map(function(n){return a.stringify(n,t,e)}).join("");var l={type:e.type,content:a.stringify(e.content,t,r),tag:"span",classes:["token",e.type],attributes:{},language:t,parent:r};if("comment"==l.type&&(l.attributes.spellcheck="true"),e.alias){var i="Array"===n.util.type(e.alias)?e.alias:[e.alias];Array.prototype.push.apply(l.classes,i)}n.hooks.run("wrap",l);var o="";for(var s in l.attributes)o+=(o?" ":"")+s+'="'+(l.attributes[s]||"")+'"';return"<"+l.tag+' class="'+l.classes.join(" ")+'" '+o+">"+l.content+"</"+l.tag+">"},!_self.document)return _self.addEventListener?(_self.addEventListener("message",function(e){var t=JSON.parse(e.data),a=t.language,r=t.code,l=t.immediateClose;_self.postMessage(n.highlight(r,n.languages[a],a)),l&&_self.close()},!1),_self.Prism):_self.Prism;var r=document.currentScript||[].slice.call(document.getElementsByTagName("script")).pop();return r&&(n.filename=r.src,document.addEventListener&&!r.hasAttribute("data-manual")&&document.addEventListener("DOMContentLoaded",n.highlightAll)),_self.Prism}();"undefined"!=typeof module&&module.exports&&(module.exports=Prism),"undefined"!=typeof global&&(global.Prism=Prism);
+</script>
+
+<script type="text/javascript">
+Prism.languages.clike={comment:[{pattern:/(^|[^\\])\/\*[\w\W]*?\*\//,lookbehind:!0},{pattern:/(^|[^\\:])\/\/.*/,lookbehind:!0}],string:{pattern:/(["'])(\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/,greedy:!0},"class-name":{pattern:/((?:\b(?:class|interface|extends|implements|trait|instanceof|new)\s+)|(?:catch\s+\())[a-z0-9_\.\\]+/i,lookbehind:!0,inside:{punctuation:/(\.|\\)/}},keyword:/\b(if|else|while|do|for|return|in|instanceof|function|new|try|throw|catch|finally|null|break|continue)\b/,"boolean":/\b(true|false)\b/,"function":/[a-z0-9_]+(?=\()/i,number:/\b-?(?:0x[\da-f]+|\d*\.?\d+(?:e[+-]?\d+)?)\b/i,operator:/--?|\+\+?|!=?=?|<=?|>=?|==?=?|&&?|\|\|?|\?|\*|\/|~|\^|%/,punctuation:/[{}[\];(),.:]/};
+</script>
+
+<script type="text/javascript">
+Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(as|async|await|break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|finally|for|from|function|get|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|set|static|super|switch|this|throw|try|typeof|var|void|while|with|yield)\b/,number:/\b-?(0x[\dA-Fa-f]+|0b[01]+|0o[0-7]+|\d*\.?\d+([Ee][+-]?\d+)?|NaN|Infinity)\b/,"function":/[_$a-zA-Z\xA0-\uFFFF][_$a-zA-Z0-9\xA0-\uFFFF]*(?=\()/i}),Prism.languages.insertBefore("javascript","keyword",{regex:{pattern:/(^|[^\/])\/(?!\/)(\[.+?]|\\.|[^\/\\\r\n])+\/[gimyu]{0,5}(?=\s*($|[\r\n,.;})]))/,lookbehind:!0,greedy:!0}}),Prism.languages.insertBefore("javascript","class-name",{"template-string":{pattern:/`(?:\\\\|\\?[^\\])*?`/,greedy:!0,inside:{interpolation:{pattern:/\$\{[^}]+\}/,inside:{"interpolation-punctuation":{pattern:/^\$\{|\}$/,alias:"punctuation"},rest:Prism.languages.javascript}},string:/[\s\S]+/}}}),Prism.languages.markup&&Prism.languages.insertBefore("markup","tag",{script:{pattern:/(<script[\w\W]*?>)[\w\W]*?(?=<\/script>)/i,lookbehind:!0,inside:Prism.languages.javascript,alias:"language-javascript"}}),Prism.languages.js=Prism.languages.javascript;
+</script>
+
+<script type="text/javascript">
+Prism.languages.json={property:/".*?"(?=\s*:)/gi,string:/"(?!:)(\\?[^"])*?"(?!:)/g,number:/\b-?(0x[\dA-Fa-f]+|\d*\.?\d+([Ee]-?\d+)?)\b/g,punctuation:/[{}[\]);,]/g,operator:/:/g,"boolean":/\b(true|false)\b/gi,"null":/\bnull\b/gi},Prism.languages.jsonp=Prism.languages.json;
+</script>
+
+<script type="text/javascript">
+Prism.languages.java=Prism.languages.extend("clike",{keyword:/\b(abstract|continue|for|new|switch|assert|default|goto|package|synchronized|boolean|do|if|private|this|break|double|implements|protected|throw|byte|else|import|public|throws|case|enum|instanceof|return|transient|catch|extends|int|short|try|char|final|interface|static|void|class|finally|long|strictfp|volatile|const|float|native|super|while)\b/,number:/\b0b[01]+\b|\b0x[\da-f]*\.?[\da-fp\-]+\b|\b\d*\.?\d+(?:e[+-]?\d+)?[df]?\b/i,operator:{pattern:/(^|[^.])(?:\+[+=]?|-[-=]?|!=?|<<?=?|>>?>?=?|==?|&[&=]?|\|[|=]?|\*=?|\/=?|%=?|\^=?|[?:~])/m,lookbehind:!0}}),Prism.languages.insertBefore("java","function",{annotation:{alias:"punctuation",pattern:/(^|[^.])@\w+/,lookbehind:!0}});
+</script>
+
+<script type="text/javascript">
+Prism.languages.markup={comment:/<!--[\w\W]*?-->/,prolog:/<\?[\w\W]+?\?>/,doctype:/<!DOCTYPE[\w\W]+?>/,cdata:/<!\[CDATA\[[\w\W]*?]]>/i,tag:{pattern:/<\/?(?!\d)[^\s>\/=.$<]+(?:\s+[^\s>\/=]+(?:=(?:("|')(?:\\\1|\\?(?!\1)[\w\W])*\1|[^\s'">=]+))?)*\s*\/?>/i,inside:{tag:{pattern:/^<\/?[^\s>\/]+/i,inside:{punctuation:/^<\/?/,namespace:/^[^\s>\/:]+:/}},"attr-value":{pattern:/=(?:('|")[\w\W]*?(\1)|[^\s>]+)/i,inside:{punctuation:/[=>"']/}},punctuation:/\/?>/,"attr-name":{pattern:/[^\s>\/]+/,inside:{namespace:/^[^\s>\/:]+:/}}}},entity:/&#?[\da-z]{1,8};/i},Prism.hooks.add("wrap",function(a){"entity"===a.type&&(a.attributes.title=a.content.replace(/&amp;/,"&"))}),Prism.languages.xml=Prism.languages.markup,Prism.languages.html=Prism.languages.markup,Prism.languages.mathml=Prism.languages.markup,Prism.languages.svg=Prism.languages.markup;
+</script>
+
+<script type="text/x-mathjax-config">
+(function () {
+
+MathJax.Hub.Config({
+	'showProcessingMessages': false,
+	'messageStyle': 'none'
+});
+
+if (typeof MathJaxListener !== 'undefined') {
+	MathJax.Hub.Register.StartupHook('End', function () {
+		MathJaxListener.invokeCallbackForKey_('End');
+	});
+}
+
+})();
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+</body>
+
+</html>
